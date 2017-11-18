@@ -1,0 +1,67 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "courrierDepart",
+            "otherEntityName": "courrierDepart",
+            "otherEntityRelationshipName": "numeroProjet"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "courrierArrive",
+            "otherEntityName": "courrierArrive",
+            "otherEntityRelationshipName": "numeroProjet"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "pvReunion",
+            "otherEntityName": "pvReunion",
+            "otherEntityRelationshipName": "numeroProjet"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "plan",
+            "otherEntityName": "plan",
+            "otherEntityRelationshipName": "numeroProjet"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "projet",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "numeroProjet",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "mo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mod",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "architecture",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bet",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171109093232",
+    "entityTableName": "projet",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

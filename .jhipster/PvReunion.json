@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "idPieceJointe",
+            "otherEntityName": "pieceJointe",
+            "otherEntityRelationshipName": "pvReunion"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "numeroProjet",
+            "otherEntityName": "projet",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "numeroPv",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "datePv",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20171109093236",
+    "entityTableName": "pv_reunion",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

@@ -1,0 +1,34 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "numeroProjet",
+            "otherEntityName": "projet",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "numeroPlan",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "typePlan",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "contenuPlan",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171109093237",
+    "entityTableName": "plan",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

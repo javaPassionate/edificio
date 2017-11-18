@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "idPieceJointe",
+            "otherEntityName": "pieceJointe",
+            "otherEntityRelationshipName": "courrierArrive"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "numeroProjet",
+            "otherEntityName": "projet",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "numeroCourrierDepart",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "envoyePar",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateReception",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20171109093235",
+    "entityTableName": "courrier_arrive",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}
