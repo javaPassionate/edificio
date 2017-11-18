@@ -1,0 +1,67 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProjetLabel">Create or edit a Projet</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!projet.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="projet.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_projet">Projet</label>
+            <input type="text" class="form-control" name="projet" id="field_projet"
+                [(ngModel)]="projet.projet" required />
+            <div [hidden]="!(editForm.controls.projet?.dirty && editForm.controls.projet?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.projet?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_numeroProjet">Numero Projet</label>
+            <input type="text" class="form-control" name="numeroProjet" id="field_numeroProjet"
+                [(ngModel)]="projet.numeroProjet" required />
+            <div [hidden]="!(editForm.controls.numeroProjet?.dirty && editForm.controls.numeroProjet?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.numeroProjet?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mo">Mo</label>
+            <input type="text" class="form-control" name="mo" id="field_mo"
+                [(ngModel)]="projet.mo"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mod">Mod</label>
+            <input type="text" class="form-control" name="mod" id="field_mod"
+                [(ngModel)]="projet.mod"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_architecture">Architecture</label>
+            <input type="text" class="form-control" name="architecture" id="field_architecture"
+                [(ngModel)]="projet.architecture"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_bet">Bet</label>
+            <input type="text" class="form-control" name="bet" id="field_bet"
+                [(ngModel)]="projet.bet"  />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

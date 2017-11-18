@@ -1,0 +1,58 @@
+
+<div *ngIf="piecejointe">
+    <h2><span>Piecejointe</span> {{piecejointe.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Id Piece Jointe</span></dt>
+        <dd>
+            <span>{{piecejointe.idPieceJointe}}</span>
+        </dd>
+        <dt><span>Name File</span></dt>
+        <dd>
+            <span>{{piecejointe.nameFile}}</span>
+        </dd>
+        <dt><span>Content</span></dt>
+        <dd>
+            <div *ngIf="piecejointe.content">
+                <a (click)="openFile(piecejointe.contentContentType, piecejointe.content)">open</a>
+                {{piecejointe.contentContentType}}, {{byteSize(piecejointe.content)}}
+            </div>
+        </dd>
+        <dt><span>Path</span></dt>
+        <dd>
+            <span>{{piecejointe.path}}</span>
+        </dd>
+        <dt><span>Courrier Depart</span></dt>
+        <dd>
+            <div *ngIf="piecejointe.courrierDepart">
+                <a [routerLink]="['/courrier-depart', piecejointe.courrierDepart?.id]">{{piecejointe.courrierDepart?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Courrier Arrive</span></dt>
+        <dd>
+            <div *ngIf="piecejointe.courrierArrive">
+                <a [routerLink]="['/courrier-arrive', piecejointe.courrierArrive?.id]">{{piecejointe.courrierArrive?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Pv Reunion</span></dt>
+        <dd>
+            <div *ngIf="piecejointe.pvReunion">
+                <a [routerLink]="['/pv-reunion', piecejointe.pvReunion?.id]">{{piecejointe.pvReunion?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'piecejointe/'+ piecejointe.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,83 @@
+<div>
+    <h2>
+        <span>Piecejointes</span>
+        <button class="btn btn-primary float-right jh-create-entity create-piecejointe" [routerLink]="['/', { outlets: { popup: ['piecejointe-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Piecejointe
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="piecejointes">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Id Piece Jointe</span></th>
+            <th><span>Name File</span></th>
+            <th><span>Content</span></th>
+            <th><span>Path</span></th>
+            <th><span>Courrier Depart</span></th>
+            <th><span>Courrier Arrive</span></th>
+            <th><span>Pv Reunion</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let piecejointe of piecejointes ;trackBy: trackId">
+                <td><a [routerLink]="['../piecejointe', piecejointe.id ]">{{piecejointe.id}}</a></td>
+                <td>{{piecejointe.idPieceJointe}}</td>
+                <td>{{piecejointe.nameFile}}</td>
+                <td>
+                    <a *ngIf="piecejointe.content" (click)="openFile(piecejointe.contentContentType, piecejointe.content)">open</a>
+                    <span *ngIf="piecejointe.content">{{piecejointe.contentContentType}}, {{byteSize(piecejointe.content)}}</span>
+                </td>
+                <td>{{piecejointe.path}}</td>
+                <td>
+                    <div *ngIf="piecejointe.courrierDepart">
+                        <a [routerLink]="['../courrier-depart', piecejointe.courrierDepart?.id ]" >{{piecejointe.courrierDepart?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="piecejointe.courrierArrive">
+                        <a [routerLink]="['../courrier-arrive', piecejointe.courrierArrive?.id ]" >{{piecejointe.courrierArrive?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="piecejointe.pvReunion">
+                        <a [routerLink]="['../pv-reunion', piecejointe.pvReunion?.id ]" >{{piecejointe.pvReunion?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../piecejointe', piecejointe.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'piecejointe/'+ piecejointe.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'piecejointe/'+ piecejointe.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

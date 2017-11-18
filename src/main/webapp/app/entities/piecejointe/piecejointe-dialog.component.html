@@ -1,0 +1,107 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPiecejointeLabel">Create or edit a Piecejointe</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!piecejointe.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="piecejointe.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_idPieceJointe">Id Piece Jointe</label>
+            <input type="number" class="form-control" name="idPieceJointe" id="field_idPieceJointe"
+                [(ngModel)]="piecejointe.idPieceJointe" required />
+            <div [hidden]="!(editForm.controls.idPieceJointe?.dirty && editForm.controls.idPieceJointe?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.idPieceJointe?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.idPieceJointe?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nameFile">Name File</label>
+            <input type="text" class="form-control" name="nameFile" id="field_nameFile"
+                [(ngModel)]="piecejointe.nameFile" required />
+            <div [hidden]="!(editForm.controls.nameFile?.dirty && editForm.controls.nameFile?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nameFile?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_content">Content</label>
+            <div>
+                <div *ngIf="piecejointe.content" class="form-text text-danger clearfix">
+                    <a class="pull-left" (click)="openFile(piecejointe.contentContentType, piecejointe.content)">open</a><br>
+                    <span class="pull-left">{{piecejointe.contentContentType}}, {{byteSize(piecejointe.content)}}</span>
+                    <button type="button" (click)="piecejointe.content=null;piecejointe.contentContentType=null;"
+                            class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_content" (change)="setFileData($event, piecejointe, 'content', false)"/>
+            </div>
+            <input type="hidden" class="form-control" name="content" id="field_content"
+                [(ngModel)]="piecejointe.content" required />
+            <input type="hidden" class="form-control" name="contentContentType" id="field_contentContentType"
+                [(ngModel)]="piecejointe.contentContentType" />
+            <div [hidden]="!(editForm.controls.content?.dirty && editForm.controls.content?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.content?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_path">Path</label>
+            <input type="text" class="form-control" name="path" id="field_path"
+                [(ngModel)]="piecejointe.path" required />
+            <div [hidden]="!(editForm.controls.path?.dirty && editForm.controls.path?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.path?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_courrierDepart">Courrier Depart</label>
+            <select class="form-control" id="field_courrierDepart" name="courrierDepart" [(ngModel)]="piecejointe.courrierDepart" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="courrierDepartOption.id === piecejointe.courrierDepart?.id ? piecejointe.courrierDepart : courrierDepartOption" *ngFor="let courrierDepartOption of courrierdeparts; trackBy: trackCourrierDepartById">{{courrierDepartOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_courrierArrive">Courrier Arrive</label>
+            <select class="form-control" id="field_courrierArrive" name="courrierArrive" [(ngModel)]="piecejointe.courrierArrive" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="courrierArriveOption.id === piecejointe.courrierArrive?.id ? piecejointe.courrierArrive : courrierArriveOption" *ngFor="let courrierArriveOption of courrierarrives; trackBy: trackCourrierArriveById">{{courrierArriveOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_pvReunion">Pv Reunion</label>
+            <select class="form-control" id="field_pvReunion" name="pvReunion" [(ngModel)]="piecejointe.pvReunion" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="pvReunionOption.id === piecejointe.pvReunion?.id ? piecejointe.pvReunion : pvReunionOption" *ngFor="let pvReunionOption of pvreunions; trackBy: trackPvReunionById">{{pvReunionOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

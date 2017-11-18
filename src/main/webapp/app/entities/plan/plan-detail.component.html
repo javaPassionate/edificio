@@ -1,0 +1,39 @@
+
+<div *ngIf="plan">
+    <h2><span>Plan</span> {{plan.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Numero Plan</span></dt>
+        <dd>
+            <span>{{plan.numeroPlan}}</span>
+        </dd>
+        <dt><span>Type Plan</span></dt>
+        <dd>
+            <span>{{plan.typePlan}}</span>
+        </dd>
+        <dt><span>Contenu Plan</span></dt>
+        <dd>
+            <span>{{plan.contenuPlan}}</span>
+        </dd>
+        <dt><span>Numero Projet</span></dt>
+        <dd>
+            <div *ngIf="plan.numeroProjet">
+                <a [routerLink]="['/projet', plan.numeroProjet?.id]">{{plan.numeroProjet?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'plan/'+ plan.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

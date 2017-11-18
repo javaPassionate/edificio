@@ -1,0 +1,64 @@
+<div>
+    <h2>
+        <span>Pv Reunions</span>
+        <button class="btn btn-primary float-right jh-create-entity create-pv-reunion" [routerLink]="['/', { outlets: { popup: ['pv-reunion-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Pv Reunion
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="pvReunions">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Numero Pv</span></th>
+            <th><span>Date Pv</span></th>
+            <th><span>Numero Projet</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let pvReunion of pvReunions ;trackBy: trackId">
+                <td><a [routerLink]="['../pv-reunion', pvReunion.id ]">{{pvReunion.id}}</a></td>
+                <td>{{pvReunion.numeroPv}}</td>
+                <td>{{pvReunion.datePv | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="pvReunion.numeroProjet">
+                        <a [routerLink]="['../projet', pvReunion.numeroProjet?.id ]" >{{pvReunion.numeroProjet?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../pv-reunion', pvReunion.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'pv-reunion/'+ pvReunion.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'pv-reunion/'+ pvReunion.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

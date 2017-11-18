@@ -1,0 +1,67 @@
+
+entity Projet {
+	projet String required,
+    numeroProjet String required,
+    mo String,
+    mod String,
+    architecture String,
+    bet String
+}
+
+entity PieceJointe {
+	idPieceJointe Long required,
+	nameFile String required,
+	content Blob required,
+    path String required
+}
+
+entity CourrierDepart {
+	numeroCourrierDepart String required,
+    destinataire String,
+    dateEnvoi LocalDate
+}
+
+entity CourrierArrive {
+	numeroCourrierDepart String required,
+    envoyePar String,
+    dateReception LocalDate
+}
+
+entity PvReunion {
+    numeroPv String required,
+    datePv LocalDate
+}
+
+entity Plan {
+	numeroPlan String required,
+    typePlan String,
+    contenuPlan String
+}
+
+relationship OneToMany {
+	Projet to CourrierDepart {numeroProjet}
+}
+
+relationship OneToMany {
+	Projet to CourrierArrive  {numeroProjet}
+}
+
+relationship OneToMany {
+	Projet to PvReunion {numeroProjet}
+}
+
+relationship OneToMany {
+	Projet to Plan {numeroProjet} 
+}
+
+relationship OneToMany {
+	CourrierDepart {idPieceJointe}  to PieceJointe 
+}
+
+relationship OneToMany {
+	CourrierArrive {idPieceJointe}  to PieceJointe 
+}
+
+relationship OneToMany {
+	PvReunion {idPieceJointe}  to PieceJointe 
+}

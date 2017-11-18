@@ -1,0 +1,35 @@
+
+<div *ngIf="pvReunion">
+    <h2><span>Pv Reunion</span> {{pvReunion.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Numero Pv</span></dt>
+        <dd>
+            <span>{{pvReunion.numeroPv}}</span>
+        </dd>
+        <dt><span>Date Pv</span></dt>
+        <dd>
+            <span>{{pvReunion.datePv | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Numero Projet</span></dt>
+        <dd>
+            <div *ngIf="pvReunion.numeroProjet">
+                <a [routerLink]="['/projet', pvReunion.numeroProjet?.id]">{{pvReunion.numeroProjet?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'pv-reunion/'+ pvReunion.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

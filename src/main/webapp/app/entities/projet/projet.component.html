@@ -1,0 +1,66 @@
+<div>
+    <h2>
+        <span>Projets</span>
+        <button class="btn btn-primary float-right jh-create-entity create-projet" [routerLink]="['/', { outlets: { popup: ['projet-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Projet
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="projets">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Projet</span></th>
+            <th><span>Numero Projet</span></th>
+            <th><span>Mo</span></th>
+            <th><span>Mod</span></th>
+            <th><span>Architecture</span></th>
+            <th><span>Bet</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let projet of projets ;trackBy: trackId">
+                <td><a [routerLink]="['../projet', projet.id ]">{{projet.id}}</a></td>
+                <td>{{projet.projet}}</td>
+                <td>{{projet.numeroProjet}}</td>
+                <td>{{projet.mo}}</td>
+                <td>{{projet.mod}}</td>
+                <td>{{projet.architecture}}</td>
+                <td>{{projet.bet}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../projet', projet.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'projet/'+ projet.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'projet/'+ projet.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+
+<div *ngIf="courrierArrive">
+    <h2><span>Courrier Arrive</span> {{courrierArrive.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Numero Courrier Depart</span></dt>
+        <dd>
+            <span>{{courrierArrive.numeroCourrierDepart}}</span>
+        </dd>
+        <dt><span>Envoye Par</span></dt>
+        <dd>
+            <span>{{courrierArrive.envoyePar}}</span>
+        </dd>
+        <dt><span>Date Reception</span></dt>
+        <dd>
+            <span>{{courrierArrive.dateReception | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Numero Projet</span></dt>
+        <dd>
+            <div *ngIf="courrierArrive.numeroProjet">
+                <a [routerLink]="['/projet', courrierArrive.numeroProjet?.id]">{{courrierArrive.numeroProjet?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'courrier-arrive/'+ courrierArrive.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
